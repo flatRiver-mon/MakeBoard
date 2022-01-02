@@ -68,6 +68,7 @@ public class BoardMain {
 	}
 	
 	private static void read() {
+		// 게시물 상세 보기 메서드
 		System.out.print("상세보기할 게시물 번호를 입력해주세요 : ");
 		int id = Integer.parseInt(scan.nextLine());
 		int targetIndex = findIndexByArticleId(id);
@@ -81,6 +82,7 @@ public class BoardMain {
 	}
 	
 	private static void printArticle(Article article) {
+		// 게시물 내용 조회
 		System.out.println("==== " + article.id + "번 게시물====");
 		System.out.println("번호 : " + article.id);
 		System.out.println("제목 : " + article.title);
@@ -91,6 +93,7 @@ public class BoardMain {
 	}
 
 	private static void printArticles(ArrayList<Article> targetList) {
+		// targetList로 전체 게시물 목록 조회
 		for(int i = 0; i < targetList.size(); i++) {
 			Article article = targetList.get(i);
 			System.out.println("번호 : " + article.id);
@@ -100,6 +103,7 @@ public class BoardMain {
 	}
 	
 	private static void search() {
+		// 제목 키워드로 String.contains를 이용한 검색 메서드
 		System.out.print("검색 키워드를 입력해주세요 :");
 		String keyword = scan.nextLine();
 		
@@ -118,6 +122,7 @@ public class BoardMain {
 	}
 
 	private static void delete() {
+		// ArrayList의 remove기능을 이용한 게시물 삭제 메서드
 		System.out.print("삭제할 게시물 번호 : ");
 		int targetId = Integer.parseInt(scan.nextLine());
 		
@@ -135,15 +140,19 @@ public class BoardMain {
 	}
 	
 	private static void printHelp() {
+		// 기능 도움말 메서드
 		System.out.println("add  : 게시물 등록");
 		System.out.println("list : 게시물 목록 조회");	
 		System.out.println("update : 게시물 수정");
+		System.out.println("delete : 게시물 삭제");
+		System.out.println("search : 게시물 검색");
+		System.out.println("read : 게시물 내용 조회");
 		
 	}
 
 	private static void add() {
 		
-//		ids.add(lastArticleId);
+		// 게시물 추가 메서드
 		System.out.print("제목을 입력해주세요 : ");
 		String title = scan.nextLine();
 		System.out.print("내용을 입력해주세요 : ");
@@ -158,6 +167,8 @@ public class BoardMain {
 	}
 
 	private static void update() {
+		
+		// ArrayList의 set 메서드를 이용한 게시물 수정 메서드
 		System.out.print("수정할 게시물 번호 : ");
 		int targetId = Integer.parseInt(scan.nextLine());
 		
@@ -181,10 +192,12 @@ public class BoardMain {
 	}
 
 	private static void list() {
+		// 게시물 목록 조회 메서드
 		printArticles(articles);
 	}
 	
 	public static int findIndexByArticleId(int targetId) {
+		// 인덱스 값이 -1이면 없는 게시물로 반환, 있다면 올바른 게시물 번호로 반환하는 메서드
 		int index = -1;
 		
 		for(int i = 0; i < articles.size(); i++) {
