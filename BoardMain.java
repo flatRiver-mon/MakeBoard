@@ -17,7 +17,13 @@ public class BoardMain {
 	
 	public static void main(String[] args) {
 		
-
+		Article a1 = new Article(1, "안녕하세요", "내용1");
+		Article a2 = new Article(2, "반갑습니다", "내용2");
+		Article a3 = new Article(3, "안녕2", "내용3");
+		
+		articles.add(a1);
+		articles.add(a2);
+		articles.add(a3);
 		
 		while(true) {
 			System.out.print("명령어를 입력해주세요 : ");
@@ -45,11 +51,43 @@ public class BoardMain {
 				
 				printHelp();
 				
-			} 
+			}
+			else if(cmd.equals("search")) {
+				
+				search();
+				
+			}
 			else {
 				System.out.println("알 수 없는 명령어입니다.");
 			}
 		}
+		
+	}
+	
+	private static void printArticles(ArrayList<Article> targetList) {
+		for(int i = 0; i < targetList.size(); i++) {
+			Article article = targetList.get(i);
+			System.out.println("번호 : " + article.id);
+			System.out.println("제목 : " + article.title);
+			System.out.println("=====================");
+		}
+	}
+	
+	private static void search() {
+		System.out.print("검색 키워드를 입력해주세요 :");
+		String keyword = scan.nextLine();
+		
+		ArrayList<Article> searchedList = new ArrayList<>();
+		
+		for(int i = 0; i < articles.size(); i++) {
+			Article article = articles.get(i);
+			
+			if(article.title.contains(keyword)) {
+				searchedList.add(article);
+			}
+		}
+		
+		printArticles(searchedList);
 		
 	}
 
@@ -117,13 +155,7 @@ public class BoardMain {
 	}
 
 	private static void list() {
-		for(int i = 0; i < articles.size(); i++) {
-			Article article = articles.get(i);
-			System.out.println("번호 : " + article.id);
-			System.out.println("제목 : " + article.title);
-			System.out.println("=====================");
-		}
-		
+		printArticles(articles);
 	}
 	
 	public static int findIndexByArticleId(int targetId) {
