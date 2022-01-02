@@ -1,5 +1,7 @@
 package exam.day3.board;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,13 +15,13 @@ public class BoardMain {
 	
 	
 	static ArrayList<Article> articles = new ArrayList<>();
-	static int lastArticleId = 1; // 가장 마지막에 만들어진 게시물 번호
+	static int lastArticleId = 4; // 가장 마지막에 만들어진 게시물 번호
 	
 	public static void main(String[] args) {
 		
-		Article a1 = new Article(1, "안녕하세요", "내용1");
-		Article a2 = new Article(2, "반갑습니다", "내용2");
-		Article a3 = new Article(3, "안녕2", "내용3");
+		Article a1 = new Article(1, "안녕하세요", "내용1","익명", "2022.01.02", 0);
+		Article a2 = new Article(2, "반갑습니다", "내용2","익명", "2022.01.02", 0);
+		Article a3 = new Article(3, "안녕2", "내용3","익명", "2022.01.02", 0);
 		
 		articles.add(a1);
 		articles.add(a2);
@@ -77,6 +79,7 @@ public class BoardMain {
 			System.out.println("없는 게시물입니다.");
 		} else {
 			Article article = articles.get(targetIndex);
+			article.hit++;
 			printArticle(article);
 		}
 	}
@@ -89,6 +92,9 @@ public class BoardMain {
 		System.out.println("-------------------");
 		System.out.println("내용 : " + article.body);
 		System.out.println("-------------------");
+		System.out.println("작성자 : " + "익명");
+		System.out.println("등록날짜 : " + article.regDate);
+		System.out.println("조회수 : " + article.hit);
 		System.out.println("===================");
 	}
 
@@ -98,6 +104,9 @@ public class BoardMain {
 			Article article = targetList.get(i);
 			System.out.println("번호 : " + article.id);
 			System.out.println("제목 : " + article.title);
+			System.out.println("작성자 : " + "익명");
+			System.out.println("등록날짜 : " + article.regDate);
+			System.out.println("조회수 : " + article.hit);
 			System.out.println("=====================");
 		}
 	}
@@ -158,7 +167,12 @@ public class BoardMain {
 		System.out.print("내용을 입력해주세요 : ");
 		String body = scan.nextLine();
 		
-		Article a1 = new Article(lastArticleId, title, body);
+		// 오늘 날짜 구하기
+		LocalDate now = LocalDate.now(); 
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+		String formatedNow = now.format(formatter);
+		
+		Article a1 = new Article(lastArticleId, title, body, "익명", formatedNow, 0);
 		articles.add(a1);
 		
 		System.out.println("게시물이 저장되었습니다.");
@@ -181,8 +195,9 @@ public class BoardMain {
 			String title = scan.nextLine();
 			System.out.print("내용 : ");
 			String body = scan.nextLine();
+			Article article = articles.get(index);
 			
-			articles.set(index, new Article(targetId, title, body));
+			articles.set(index, new Article(targetId, title, body,"익명", article.regDate, article.hit));
 
 			System.out.println("게시물이 수정이 완료되었습니다.");
 			
