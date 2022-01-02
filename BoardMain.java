@@ -57,6 +57,9 @@ public class BoardMain {
 				search();
 				
 			}
+			else if(cmd.equals("read")) {
+				read();
+			}
 			else {
 				System.out.println("알 수 없는 명령어입니다.");
 			}
@@ -64,6 +67,29 @@ public class BoardMain {
 		
 	}
 	
+	private static void read() {
+		System.out.print("상세보기할 게시물 번호를 입력해주세요 : ");
+		int id = Integer.parseInt(scan.nextLine());
+		int targetIndex = findIndexByArticleId(id);
+		
+		if(targetIndex == -1) {
+			System.out.println("없는 게시물입니다.");
+		} else {
+			Article article = articles.get(targetIndex);
+			printArticle(article);
+		}
+	}
+	
+	private static void printArticle(Article article) {
+		System.out.println("==== " + article.id + "번 게시물====");
+		System.out.println("번호 : " + article.id);
+		System.out.println("제목 : " + article.title);
+		System.out.println("-------------------");
+		System.out.println("내용 : " + article.body);
+		System.out.println("-------------------");
+		System.out.println("===================");
+	}
+
 	private static void printArticles(ArrayList<Article> targetList) {
 		for(int i = 0; i < targetList.size(); i++) {
 			Article article = targetList.get(i);
