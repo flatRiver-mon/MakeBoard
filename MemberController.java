@@ -8,7 +8,7 @@ public class MemberController {
 	Scanner scan = new Scanner(System.in);
 	ArrayList<Member> members = new ArrayList<>();
 	int lastMemberId = 4; // 가장 마지막에 만들어진 회원 번호
-	static Member loginedMember = null;
+	static Member loginedMember = null; // static 으로 들어있는 회원의 정보를 전체 공유 자원으로 만듦
 	
 	public MemberController() {
 		

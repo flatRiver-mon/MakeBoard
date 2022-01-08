@@ -10,6 +10,7 @@ public class ArticleController {
 	Scanner scan = new Scanner(System.in);
 	ArrayList<Article> articles = new ArrayList<>();
 	MemberController memberController = new MemberController();
+	ReadController readController = new ReadController();
 	int lastArticleId = 4;
 	
 	public ArticleController() {
@@ -96,6 +97,16 @@ public class ArticleController {
 			Article article = articles.get(targetIndex);
 			article.hit++;
 			printArticle(article);
+			
+			// 상세보기 프로세스
+			while(true) {
+				System.out.println("상세보기 기능을 선택해주세요(reply. 댓글 등록, like. 좋아요, update. 수정, delete. 삭제, back. 목록으로) : ");
+				String cmd = scan.nextLine();
+				if(cmd.equals("back")) {
+					break;
+				}
+				readController.doCommand(cmd);
+			}
 		}
 	}
 	
