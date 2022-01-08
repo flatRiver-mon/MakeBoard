@@ -8,11 +8,12 @@ public class MemberController {
 	Scanner scan = new Scanner(System.in);
 	ArrayList<Member> members = new ArrayList<>();
 	int lastMemberId = 4; // 가장 마지막에 만들어진 회원 번호
-	Member loginedMember = null;
+	static Member loginedMember = null;
 	
 	public MemberController() {
 		
 		makeTestData();
+		loginedMember = members.get(0);
 		
 	}
 	
