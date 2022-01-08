@@ -17,19 +17,32 @@ public class BoardMain {
 	static ArrayList<Member> members = new ArrayList<>();
 	static int lastArticleId = 4; // 가장 마지막에 만들어진 게시물 번호
 	static int lastMemberId = 4; // 가장 마지막에 만들어진 회원 번호
-
+	static boolean isLogin = false;
+	static Member loginedMember = null;
+	
 	public static void main(String[] args) {
 
 		Article a1 = new Article(1, "안녕하세요", "내용1", "익명", "2022.01.02", 0);
 		Article a2 = new Article(2, "반갑습니다", "내용2", "익명", "2022.01.02", 0);
 		Article a3 = new Article(3, "안녕2", "내용3", "익명", "2022.01.02", 0);
 
+		Member m1 = new Member(1, "hong123", "h1234", "홍길동");
+		Member m2 = new Member(1, "lee123", "1234", "이순신");
+		
+		
 		articles.add(a1);
 		articles.add(a2);
 		articles.add(a3);
+		
+		members.add(m1);
+		members.add(m2);
 
 		while (true) {
-			System.out.print("명령어를 입력해주세요 : ");
+			if(isLogin == false) {
+				System.out.print("명령어를 입력해주세요 : ");				
+			} else {
+				System.out.print("명령어를 입력해주세요 [" + loginedMember.loginId + "(" + loginedMember.nickname + ")]: ");
+			}
 			String cmd = scan.nextLine();
 
 			if (cmd.equals("list")) {
@@ -60,6 +73,8 @@ public class BoardMain {
 			} else if (cmd.equals("signup")) {
 				signup();
 				
+			} else if (cmd.equals("signin")) {
+				signin();
 			}
 
 			else {
@@ -67,6 +82,31 @@ public class BoardMain {
 			}
 		}
 
+	}
+	
+	private static void signin() {
+		System.out.print("아이디 : ");
+		String loginId = scan.nextLine();
+		System.out.print("비밀번호 : ");
+		String loginPw = scan.nextLine();
+		
+		boolean isExist = false; // 아이디 존재 여부
+		
+		for(int i = 0; i < members.size(); i++) {
+			Member member = members.get(i);
+			if(member.loginId.equals(loginId)) {
+				if(member.loginPw.equals(loginPw)) {
+					System.out.println(member.nickname + "님 반갑습니다!");
+					isExist = true;
+					isLogin = true;
+					loginedMember = member;
+				}
+			}
+		}
+		
+		if(isExist == false) {
+			System.out.println("잘못된 회원정보입니다.");			
+		}
 	}
 
 	private static void signup() {
