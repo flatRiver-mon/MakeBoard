@@ -31,7 +31,7 @@ public class BoardMain {
 			
 			if(module.equals("article")) {
 				articleController.doCommand(func);
-			} else if(module.equals("func")) {
+			} else if(module.equals("member")) {
 				memberController.doCommand(func);
 			} else {
 				System.out.println("잘못된 명령입니다.");
