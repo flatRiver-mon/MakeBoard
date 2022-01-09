@@ -98,7 +98,19 @@ public class MemberController {
 			System.out.println("비밀번호 : " + member.loginPw);
 			System.out.println("이름 : " + member.nickname);
 		}
+		
 	}
 
+	// 변수명 -> 명사
+	// 함수명 -> 동사
+	
+	public String getNicknameByMemberId(int memberId) {
+		for(int i = 0; i < members.size(); i++) {
+			if(members.get(i).id == memberId) {
+				return members.get(i).nickname;
+			}			
+		}
+		return null;
+	}
 	 	
 }

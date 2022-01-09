@@ -9,9 +9,9 @@ public class ReadController {
 	int lastReplyId = 1;
 	ArrayList<Reply> replies = new ArrayList<>(); 
 	
-	public void doCommand(String cmd) {
+	public void doCommand(String cmd, Article article) {
 		if(cmd.equals("reply")) {
-			reply();
+			reply(article);
 		} else if(cmd.equals("like")) {
 			like();
 		} else if(cmd.equals("update")) {
@@ -33,16 +33,17 @@ public class ReadController {
 		System.out.println("[좋아요 기능]");	
 	}
 
-	private void reply() {
+	private void reply(Article article) {
 		System.out.print("댓글 내용을 입력해주세요. : ");
 		String body = scan.nextLine();
 		int memberId = MemberController.loginedMember.id;
 		String currentDate = MyUtil.getCurrentDate();
 		
-		Reply reply = new Reply(lastReplyId, body, memberId, currentDate);
+		Reply reply = new Reply(lastReplyId, article.id, body, memberId, currentDate);
 		replies.add(reply);
 		lastReplyId++;
 		System.out.println("댓글이 등록되었습니다.");
 		
 	}
+	
 }
