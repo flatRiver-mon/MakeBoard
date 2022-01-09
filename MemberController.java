@@ -36,7 +36,7 @@ public class MemberController {
 	private void makeTestData() {
 
 		Member m1 = new Member(1, "hong123", "h1234", "홍길동");
-		Member m2 = new Member(1, "lee123", "1234", "이순신");
+		Member m2 = new Member(2, "lee123", "1234", "이순신");
 		
 		members.add(m1);
 		members.add(m2);		

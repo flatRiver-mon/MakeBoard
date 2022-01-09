@@ -186,6 +186,17 @@ public class ArticleController {
 		System.out.println("-------------------");
 		System.out.println("작성자 : " + nicknameOfArticle);
 		System.out.println("등록날짜 : " + article.regDate);
+		
+		Like like = readController.getLikeByArticleIdAndMemberId(article.id, MemberController.loginedMember.id);
+		
+		int count = readController.getLikeCountOfArticle(article.id);
+		
+		if(like == null) {
+			System.out.println("좋아요 : ♡ " + count);
+		} else {
+			System.out.println("좋아요 : ♥ " + count);			
+		}
+		
 		System.out.println("조회수 : " + article.hit);
 		System.out.println("===================");
 		System.out.println("========댓글=========");
